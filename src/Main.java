@@ -2,6 +2,16 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static void showMenu() {
+
+        System.out.println("\n=== BANK SYSTEM ===");
+        System.out.println("1 - Check Balance");
+        System.out.println("2 - Deposit");
+        System.out.println("3 - Withdraw");
+        System.out.println("4 - Exit");
+        System.out.print("Choose an option: ");
+    }
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -11,12 +21,7 @@ public class Main {
 
         do {
 
-            System.out.println("\n=== BANK SYSTEM ===");
-            System.out.println("1 - Check Balance");
-            System.out.println("2 - Deposit");
-            System.out.println("3 - Withdraw");
-            System.out.println("4 - Exit");
-            System.out.print("Choose an option: ");
+            showMenu();
 
             option = scanner.nextInt();
 
