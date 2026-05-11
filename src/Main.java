@@ -2,6 +2,35 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static void checkBalance(double balance) {
+        System.out.println("Current Balance: $" + balance);
+    }
+
+    public static double deposit(double balance, double amount) {
+
+        balance += amount;
+
+        System.out.println("Deposit successful!");
+
+        return balance;
+    }
+
+    public static double withdraw(double balance, double amount) {
+
+        if (amount > balance) {
+
+            System.out.println("Insufficient balance");
+
+        } else {
+
+            balance -= amount;
+
+            System.out.println("Withdraw successful!");
+        }
+
+        return balance;
+    }
+
     public static void showMenu() {
 
         System.out.println("\n=== BANK SYSTEM ===");
@@ -14,9 +43,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Account account = new Account();
+
         Scanner scanner = new Scanner(System.in);
 
-        double balance = 1000.0;
         int option;
 
         do {
@@ -28,26 +58,23 @@ public class Main {
             switch (option) {
 
                 case 1:
-                    System.out.println("Current balance: $" + balance);
+                    account.checkBalance();
                     break;
 
                 case 2:
+
                     System.out.print("Enter deposit amount: ");
-                    double deposit = scanner.nextDouble();
-                    balance += deposit;
-                    System.out.println("Deposit successful!");
+                    double depositAmount = scanner.nextDouble();
+
+                    account.deposit(depositAmount);
+
                     break;
 
                 case 3:
-                    System.out.print("Enter withdraw amount: ");
-                    double withdraw = scanner.nextDouble();
+                    System.out.println("Enter withdrawal amount");
+                    double withdrawAmount = scanner.nextDouble();
 
-                    if (withdraw <= balance) {
-                        balance -= withdraw;
-                        System.out.println("Withdraw successful!");
-                    } else {
-                        System.out.println("Insufficient balance.");
-                    }
+                    account.withdraw(withdrawAmount);
 
                     break;
 
