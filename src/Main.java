@@ -45,7 +45,7 @@ public class Main {
         return balance;
     }
 
-    public static void showMenu() {
+    public static void showMenu(Account account) {
 
     }
 
@@ -72,9 +72,11 @@ public class Main {
 
         do {
 
-            showMenu();
+            showMenu(account);
 
             System.out.println("\n=== BANK SYSTEM ===");
+            System.out.println("Current Account: " + account.getAccountNumber());
+
             System.out.println("1 - Create Account");
             System.out.println("2 - Switch Account");
             System.out.println("3 - Check Balance");
@@ -82,6 +84,7 @@ public class Main {
             System.out.println("5 - Withdraw");
             System.out.println("6 - Transaction History");
             System.out.println("7 - Exit");
+
             System.out.println("Choose an option: ");
 
             option = scanner.nextInt();
