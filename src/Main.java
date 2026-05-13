@@ -1,8 +1,32 @@
+import java.io.FileWriter;
+
+import java.io.IOException;
+
 import java.util.Scanner;
 
 import java.util.ArrayList;
 
 public class Main {
+
+    public static void saveAccount(ArrayList<Account> accounts) {
+
+        try {
+
+            FileWriter writer = new FileWriter("accounts.txt");
+
+            for (Account account : accounts) {
+
+                writer.write(account.getAccountNumber() + "," + account.getBalance() + "\n");
+            }
+
+            writer.close();
+
+            System.out.println("Accounts saved successfully");
+        } catch (IOException e) {
+
+            System.out.println("Error saving accounts");
+        }
+    }
 
     public static Account findAccount(ArrayList<Account> accounts, int accountNumber) {
 
@@ -147,6 +171,7 @@ public class Main {
 
                 case 7:
                     System.out.println("Exiting system...");
+                    saveAccount(accounts);
                     break;
 
                 default:
