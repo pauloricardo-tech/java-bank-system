@@ -130,6 +130,17 @@ public class Main {
             return;
         }
 
+        System.out.println("Enter PIN");
+        int enteredPin = scanner.nextInt();
+
+        if (account.getPin() != enteredPin) {
+
+            System.out.println("Incorrect Pin");
+            return;
+        }
+
+        showAccountHeader(account);
+
         int option;
 
         do {
@@ -157,22 +168,30 @@ public class Main {
                     System.out.println("Enter new account number: ");
                     int newAccountNumber = scanner.nextInt();
 
+                    Account existingAccount = Bank.findAccount(accounts, newAccountNumber);
+
+                    if (existingAccount != null) {
+
+                        System.out.println("Account number already exists!");
+
+                        break;
+                    }
+
                     System.out.println("Enter holder name: ");
+
+                    scanner.nextLine();
+
                     String holderName = scanner.nextLine();
 
                     System.out.println("Create PIN");
                     int pin = scanner.nextInt();
 
-                    System.out.println("Enter PIN");
-                    int enteredPin = scanner.nextInt();
+                    if (pin < 1000 || pin > 9999) {
 
-                    if (account.getPin() != enteredPin) {
+                        System.out.println("PIN must have 4 digits!");
 
-                        System.out.println("Incorrect Pin");
-                        return;
+                        break;
                     }
-
-                    Account existingAccount = findAccount(accounts, newAccountNumber);
 
                     if (existingAccount != null) {
 
@@ -185,6 +204,8 @@ public class Main {
                     double initialBalance = scanner.nextDouble();
 
                     accounts.add(new Account(newAccountNumber,holderName,initialBalance,pin));
+
+                    Bank.saveAccounts(accounts);
 
                     System.out.println("Account created successfully!");
                     break;
@@ -217,6 +238,8 @@ public class Main {
                     double depositAmount = scanner.nextDouble();
 
                     account.deposit(depositAmount);
+
+                    Bank.saveAccounts(accounts);
                     break;
 
                 case 5:
@@ -224,6 +247,8 @@ public class Main {
                     double withdrawAmount = scanner.nextDouble();
 
                     account.withdraw(withdrawAmount);
+
+                    Bank.saveAccounts(accounts);
                     break;
 
 
@@ -246,5 +271,16 @@ public class Main {
         } while (option != 7);
 
         scanner.close();
+    }
+
+    public static void showAccountHeader(Account account) {
+
+        System.out.println("\n========================");
+
+        System.out.println("Welcome, " + account.getHolderName() + "!");
+
+        System.out.println("Account Number: " + account.getAccountNumber());
+
+        System.out.println("========================");
     }
 }

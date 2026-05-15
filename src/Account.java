@@ -50,6 +50,13 @@ public void checkBalance() {
 }
 public void deposit(double amount) {
 
+    if (amount <= 0) {
+
+        System.out.println("Invalid deposit amount!");
+
+        return;
+    }
+
     balance += amount;
 
     transactionHistory.add("Deposit: $" + amount);
@@ -57,6 +64,13 @@ public void deposit(double amount) {
     System.out.println("Deposit successful!");
 }
 public void withdraw(double amount) {
+
+    if (amount <= 0) {
+
+        System.out.println("Invalid withdraw amount!");
+
+        return;
+    }
 
     if (amount > balance) {
 
