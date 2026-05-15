@@ -1,3 +1,7 @@
+import java.io.File;
+
+import java.io.FileNotFoundException;
+
 import java.io.FileWriter;
 
 import java.io.IOException;
@@ -16,7 +20,7 @@ public class Main {
 
             for (Account account : accounts) {
 
-                writer.write(account.getAccountNumber() + "," + account.getBalance() + "\n");
+                writer.write(account.getAccountNumber() + "," + account.getHolderName() + "," + account.getBalance() + "," + account.getPin() + "\n");
             }
 
             writer.close();
@@ -26,6 +30,43 @@ public class Main {
 
             System.out.println("Error saving accounts");
         }
+    }
+
+    public static ArrayList<Account> loadAccounts() {
+
+        ArrayList<Account> accounts = new ArrayList<>();
+
+        try {
+
+            File file = new File ("accounts.txt");
+
+            Scanner fileScanner = new Scanner(file);
+
+            while (fileScanner.hasNextLine()) {
+
+                String line = fileScanner.nextLine();
+
+                String[] parts = line.split(",");
+
+                int accountNumber = Integer.parseInt(parts[0]);
+
+                String holderName = parts[1];
+
+                double balance = Double.parseDouble(parts[2]);
+
+                int pin = Integer.parseInt(parts[3]);
+
+                accounts.add(new Account(accountNumber, holderName, balance, pin));
+            }
+
+            fileScanner.close();
+
+        } catch (FileNotFoundException e) {
+
+            System.out.println("No saved accounts found");
+        }
+
+        return accounts;
     }
 
     public static Account findAccount(ArrayList<Account> accounts, int accountNumber) {
@@ -75,17 +116,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<Account> accounts = new ArrayList<>();
-
-        accounts.add(new Account (12345, 1000));
-        accounts.add(new Account(67890, 500));
+        ArrayList<Account> accounts = Bank.loadAccounts();
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter account number");
         int accountNumber = scanner.nextInt();
 
-        Account account = findAccount(accounts, accountNumber);
+        Account account = Bank.findAccount(accounts, accountNumber);
 
         if (account == null) {
             System.out.println("Account not found!");
@@ -119,10 +157,34 @@ public class Main {
                     System.out.println("Enter new account number: ");
                     int newAccountNumber = scanner.nextInt();
 
+                    System.out.println("Enter holder name: ");
+                    String holderName = scanner.nextLine();
+
+                    System.out.println("Create PIN");
+                    int pin = scanner.nextInt();
+
+                    System.out.println("Enter PIN");
+                    int enteredPin = scanner.nextInt();
+
+                    if (account.getPin() != enteredPin) {
+
+                        System.out.println("Incorrect Pin");
+                        return;
+                    }
+
+                    Account existingAccount = findAccount(accounts, newAccountNumber);
+
+                    if (existingAccount != null) {
+
+                        System.out.println("Account already exists!");
+
+                        break;
+                    }
+
                     System.out.println("Enter initial balance");
                     double initialBalance = scanner.nextDouble();
 
-                    accounts.add(new Account(newAccountNumber, initialBalance));
+                    accounts.add(new Account(newAccountNumber,holderName,initialBalance,pin));
 
                     System.out.println("Account created successfully!");
                     break;
@@ -171,7 +233,9 @@ public class Main {
 
                 case 7:
                     System.out.println("Exiting system...");
-                    saveAccount(accounts);
+
+                    Bank.saveAccounts(accounts);
+
                     break;
 
                 default:

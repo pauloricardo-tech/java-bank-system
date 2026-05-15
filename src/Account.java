@@ -2,20 +2,37 @@ import java.util.ArrayList;
 
 public class Account {
 
+    private String holderName;
+
     private int accountNumber;
+    
+    private int pin;
 
     private double balance;
 
     private ArrayList<String> transactionHistory = new ArrayList<>();
 
-public Account(int accountNumber, double intialBalance) {
+public Account(int accountNumber, String holderName, double initialBalance, int pin) {
 
     this.accountNumber = accountNumber;
-    balance = intialBalance;
+    this.holderName = holderName;
+    this.pin = pin;
+    balance = initialBalance;
 }
 
-public int getAccountNumber() {
+    public Account(int accountNumber, double balance) {
+    }
+
+    public String getHolderName() {
+    return holderName;
+    }
+
+    public int getAccountNumber() {
     return accountNumber;
+}
+
+public int getPin() {
+    return pin;
 }
 
 public double getBalance(){
