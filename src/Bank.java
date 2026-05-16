@@ -10,7 +10,7 @@ public class Bank {
 
     public static Account findAccount(ArrayList<Account> accounts, int accountNumber) {
 
-        return Main.findAccount(accounts, accountNumber);
+        return Bank.findAccount(accounts, accountNumber);
     }
 
     public static void saveAccounts(ArrayList<Account> accounts) {
