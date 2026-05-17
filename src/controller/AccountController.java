@@ -1,16 +1,13 @@
+package controller;
+
 import model.Account;
-
 import service.Bank;
-
 import ui.Menu;
 
-import controller.AccountController;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.util.ArrayList;
-
-public class Main {
+public class AccountController {
 
     public static void createAccount(ArrayList<Account> accounts, Scanner scanner) {
 
@@ -32,15 +29,11 @@ public class Main {
         String holderName = scanner.nextLine();
 
         System.out.println("Create PIN");
-        String pinInput = scanner.next();
+        int pin = readPin(scanner);
 
-        if (pinInput.length() != 4) {
-
-            System.out.println("PIN must have exactly 4 digits!");
+        if (pin == -1) {
             return;
         }
-
-        int pin = Integer.parseInt(pinInput);
 
         if (pin < 1000 || pin > 9999) {
 
@@ -58,6 +51,20 @@ public class Main {
         System.out.println("Account created successfully");
     }
 
+    public static int readPin(Scanner scanner) {
+
+        String pinInput = scanner.next();
+
+        if (pinInput.length() != 4) {
+
+            System.out.println("PIN must have exactly 4 digits!");
+
+            return -1;
+        }
+
+        return Integer.parseInt(pinInput);
+    }
+
     public static Account switchAccount(ArrayList<Account> accounts, Scanner scanner) {
 
         System.out.println("Enter account number:");
@@ -73,7 +80,12 @@ public class Main {
         }
 
         System.out.println("Enter PIN:");
-        int enteredPin = scanner.nextInt();
+
+        int enteredPin = readPin(scanner);
+
+        if (enteredPin == -1) {
+            return null;
+        }
 
         if (foundAccount.getPin() != enteredPin) {
 
@@ -88,11 +100,6 @@ public class Main {
 
         return foundAccount;
 
-    }
-
-    public static void showBalance(Account account) {
-
-        account.checkBalance();
     }
 
     public static void depositMoney(Account account, ArrayList<Account> accounts, Scanner scanner) {
@@ -115,6 +122,11 @@ public class Main {
         Bank.saveAccounts(accounts);
     }
 
+    public static void showBalance(Account account) {
+
+        account.checkBalance();
+    }
+
     public static void showHistory(Account account) {
 
         account.showTransactionHistory();
@@ -125,86 +137,5 @@ public class Main {
         System.out.println("Exiting system...");
 
         Bank.saveAccounts(accounts);
-    }
-
-    public static void main(String[] args) {
-
-        ArrayList<Account> accounts = Bank.loadAccounts();
-
-        Scanner scanner = new Scanner(System.in);
-
-        Account account = Menu.login(accounts, scanner);
-
-        if (account == null)
-            return;
-
-        int option;
-
-        do {
-
-            System.out.println("Current Account: " + account.getAccountNumber());
-
-            Menu.showMenu();
-
-            option = scanner.nextInt();
-
-            switch (option) {
-
-                case 1:
-
-                    AccountController.createAccount(accounts, scanner);
-
-                    break;
-
-                case 2:
-
-                    Account switchedAccount = switchAccount(accounts, scanner);
-
-                    if (switchedAccount != null) {
-
-                        account = switchedAccount;
-                    }
-
-                    break;
-
-                case 3:
-
-                    showBalance(account);
-
-                    break;
-
-                case 4:
-
-                    depositMoney(account, accounts, scanner);
-
-                    break;
-
-                case 5:
-
-                    withdrawMoney(account, accounts, scanner);
-
-                    break;
-
-
-                case 6:
-
-                    showHistory(account);
-
-                    break;
-
-                case 7:
-
-                    exitSystem(accounts);
-
-                    break;
-
-                default:
-                    System.out.println("Invalid option.");
-
-            }
-
-        } while (option != 7);
-
-        scanner.close();
     }
 }

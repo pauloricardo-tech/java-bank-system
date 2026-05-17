@@ -1,4 +1,4 @@
-# Java Bank System
+# Java service.Bank System
 
 Simple banking system developed in Java.
 

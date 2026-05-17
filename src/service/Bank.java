@@ -1,3 +1,7 @@
+package service;
+
+import model.Account;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +14,15 @@ public class Bank {
 
     public static Account findAccount(ArrayList<Account> accounts, int accountNumber) {
 
-        return Bank.findAccount(accounts, accountNumber);
+        for (Account account : accounts) {
+
+            if (account.getAccountNumber() == accountNumber) {
+
+                return account;
+            }
+        }
+
+        return null;
     }
 
     public static void saveAccounts(ArrayList<Account> accounts) {
