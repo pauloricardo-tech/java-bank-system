@@ -1,5 +1,6 @@
 package ui;
 
+import controller.AccountController;
 import model.Account;
 import service.Bank;
 
@@ -37,7 +38,7 @@ public class Menu {
     public static Account login(ArrayList<Account> accounts, Scanner scanner) {
 
         System.out.println("Enter account number:");
-        int accountNumber = scanner.nextInt();
+        int accountNumber = AccountController.readInt(scanner);
 
         Account account = Bank.findAccount(accounts, accountNumber);
 

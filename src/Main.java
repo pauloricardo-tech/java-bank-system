@@ -12,121 +12,6 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void createAccount(ArrayList<Account> accounts, Scanner scanner) {
-
-        System.out.println("Enter new account number:");
-        int newAccountNumber = scanner.nextInt();
-
-        Account existingAccount = Bank.findAccount(accounts, newAccountNumber);
-
-        if (existingAccount != null) {
-
-            System.out.println("Account already exists!");
-            return;
-        }
-
-        System.out.println("Enter holder name:");
-
-        scanner.nextLine();
-
-        String holderName = scanner.nextLine();
-
-        System.out.println("Create PIN");
-        String pinInput = scanner.next();
-
-        if (pinInput.length() != 4) {
-
-            System.out.println("PIN must have exactly 4 digits!");
-            return;
-        }
-
-        int pin = Integer.parseInt(pinInput);
-
-        if (pin < 1000 || pin > 9999) {
-
-            System.out.println("PIN must have 4 digits!");
-            return;
-        }
-
-        System.out.println("Enter initial balance:");
-        double initialBalance = scanner.nextDouble();
-
-        accounts.add(new Account(newAccountNumber, holderName, initialBalance, pin));
-
-        Bank.saveAccounts(accounts);
-
-        System.out.println("Account created successfully");
-    }
-
-    public static Account switchAccount(ArrayList<Account> accounts, Scanner scanner) {
-
-        System.out.println("Enter account number:");
-        int switchAccountNumber = scanner.nextInt();
-
-        Account foundAccount = Bank.findAccount(accounts, switchAccountNumber);
-
-        if (foundAccount == null) {
-
-            System.out.println("Account not found!");
-
-            return null;
-        }
-
-        System.out.println("Enter PIN:");
-        int enteredPin = scanner.nextInt();
-
-        if (foundAccount.getPin() != enteredPin) {
-
-            System.out.println("Incorrect PIN!");
-
-            return null;
-        }
-
-        System.out.println("Account switched successfully!");
-
-        Menu.showAccountHeader(foundAccount);
-
-        return foundAccount;
-
-    }
-
-    public static void showBalance(Account account) {
-
-        account.checkBalance();
-    }
-
-    public static void depositMoney(Account account, ArrayList<Account> accounts, Scanner scanner) {
-
-        System.out.println("Enter deposit amount;");
-        double depositAmount = scanner.nextDouble();
-
-        account.deposit(depositAmount);
-
-        Bank.saveAccounts(accounts);
-    }
-
-    public static void withdrawMoney(Account account, ArrayList<Account> accounts, Scanner scanner) {
-
-        System.out.println("Enter withdrawal amount:");
-        double withdrawAmount = scanner.nextDouble();
-
-        account.withdraw(withdrawAmount);
-
-        Bank.saveAccounts(accounts);
-    }
-
-    public static void showHistory(Account account) {
-
-        account.showTransactionHistory();
-    }
-
-    public static void  exitSystem(ArrayList<Account> accounts) {
-
-        System.out.println("Exiting system...");
-
-        Bank.saveAccounts(accounts);
-    }
-
     public static void main(String[] args) {
 
         ArrayList<Account> accounts = Bank.loadAccounts();
@@ -146,7 +31,7 @@ public class Main {
 
             Menu.showMenu();
 
-            option = scanner.nextInt();
+            option = AccountController.readInt(scanner);
 
             switch (option) {
 
@@ -158,7 +43,7 @@ public class Main {
 
                 case 2:
 
-                    Account switchedAccount = switchAccount(accounts, scanner);
+                    Account switchedAccount = AccountController.switchAccount(accounts, scanner);
 
                     if (switchedAccount != null) {
 
@@ -169,32 +54,32 @@ public class Main {
 
                 case 3:
 
-                    showBalance(account);
+                    AccountController.showBalance(account);
 
                     break;
 
                 case 4:
 
-                    depositMoney(account, accounts, scanner);
+                  AccountController.depositMoney(account, accounts, scanner);
 
                     break;
 
                 case 5:
 
-                    withdrawMoney(account, accounts, scanner);
+                    AccountController.withdrawMoney(account, accounts, scanner);
 
                     break;
 
 
                 case 6:
 
-                    showHistory(account);
+                    AccountController.showHistory(account);
 
                     break;
 
                 case 7:
 
-                    exitSystem(accounts);
+                    AccountController.exitSystem(accounts);
 
                     break;
 

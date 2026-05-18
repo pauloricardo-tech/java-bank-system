@@ -9,10 +9,34 @@ import java.util.Scanner;
 
 public class AccountController {
 
+    public static int readInt(Scanner scanner) {
+
+        while (!scanner.hasNextInt()) {
+
+            System.out.println("Invalid number! Try again:");
+
+            scanner.next();
+        }
+
+        return scanner.nextInt();
+    }
+
+    public static double readDouble(Scanner scanner) {
+
+        while (!scanner.hasNextDouble()) {
+
+            System.out.println("Invalid value! Try again:");
+
+            scanner.next();
+        }
+
+        return scanner.nextDouble();
+    }
+
     public static void createAccount(ArrayList<Account> accounts, Scanner scanner) {
 
         System.out.println("Enter new account number:");
-        int newAccountNumber = scanner.nextInt();
+        int newAccountNumber = readInt(scanner);
 
         Account existingAccount = Bank.findAccount(accounts, newAccountNumber);
 
@@ -42,7 +66,7 @@ public class AccountController {
         }
 
         System.out.println("Enter initial balance:");
-        double initialBalance = scanner.nextDouble();
+        double initialBalance = readDouble(scanner);
 
         accounts.add(new Account(newAccountNumber, holderName, initialBalance, pin));
 
@@ -62,13 +86,20 @@ public class AccountController {
             return -1;
         }
 
+        if (!pinInput.matches("\\d{4}")) {
+
+            System.out.println("PIN must contain only numbers!");
+
+            return -1;
+        }
+
         return Integer.parseInt(pinInput);
     }
 
     public static Account switchAccount(ArrayList<Account> accounts, Scanner scanner) {
 
         System.out.println("Enter account number:");
-        int switchAccountNumber = scanner.nextInt();
+        int switchAccountNumber = readInt(scanner);
 
         Account foundAccount = Bank.findAccount(accounts, switchAccountNumber);
 
@@ -105,7 +136,7 @@ public class AccountController {
     public static void depositMoney(Account account, ArrayList<Account> accounts, Scanner scanner) {
 
         System.out.println("Enter deposit amount;");
-        double depositAmount = scanner.nextDouble();
+        double depositAmount = readDouble(scanner);
 
         account.deposit(depositAmount);
 
@@ -115,7 +146,7 @@ public class AccountController {
     public static void withdrawMoney(Account account, ArrayList<Account> accounts, Scanner scanner) {
 
         System.out.println("Enter withdrawal amount:");
-        double withdrawAmount = scanner.nextDouble();
+        double withdrawAmount = readDouble(scanner);
 
         account.withdraw(withdrawAmount);
 
