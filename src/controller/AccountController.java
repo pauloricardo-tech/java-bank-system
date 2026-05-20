@@ -163,6 +163,56 @@ public class AccountController {
         account.showTransactionHistory();
     }
 
+    public static void transferMoney(Account currentAccount, ArrayList<Account> accounts, Scanner scanner) {
+
+        System.out.println("Enter destination account number:");
+
+        int destinationNumber = readInt(scanner);
+
+        Account destinationAccount = Bank.findAccount(accounts, destinationNumber);
+
+        if (destinationAccount == null) {
+
+            System.out.println("Destination account not found!");
+
+            return;
+        }
+
+        if (currentAccount.getAccountNumber() == destinationNumber) {
+
+            System.out.println("Cannot transfer to the same account!");
+
+            return;
+        }
+
+        System.out.println("Enter transfer amount:");
+
+        double amount = readDouble(scanner);
+
+        if (amount <= 0) {
+
+            System.out.println("Transfer amount must be greater than 0!");
+
+            return;
+        }
+
+        if (amount > currentAccount.getBalance()) {
+
+            System.out.println("Insufficient balance!");
+
+            return;
+        }
+
+        currentAccount.withdraw(amount);
+
+        destinationAccount.deposit(amount);
+
+        Bank.saveAccounts(accounts);
+
+        System.out.println("Transfer completed successfully!");
+
+    }
+
     public static void  exitSystem(ArrayList<Account> accounts) {
 
         System.out.println("Exiting system...");

@@ -83,6 +83,12 @@ public class Main {
 
                     break;
 
+                case 8:
+
+                    AccountController.transferMoney(account, accounts, scanner);
+
+                    break;
+
                 default:
                     System.out.println("Invalid option.");
 

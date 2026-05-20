@@ -31,6 +31,7 @@ public class Menu {
         System.out.println("5 - Withdraw");
         System.out.println("6 - Transaction History");
         System.out.println("7 - Exit");
+        System.out.println("8 - Transfer Money");
 
         System.out.println("Choose an option:");
     }
