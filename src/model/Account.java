@@ -2,9 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
+import java.util.Locale;
+
 import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
+
+import java.text.NumberFormat;
 
 public class Account {
 
@@ -17,6 +21,14 @@ public class Account {
     private double balance;
 
     private ArrayList<String> transactionHistory = new ArrayList<>();
+
+    private String formatMoney(double amount) {
+
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
+
+        return formatter.format(amount);
+
+    }
 
     private void addTransaction(String transaction) {
 
@@ -62,12 +74,12 @@ public double getBalance(){
 public void showAccountInfo() {
 
     System.out.println("Account Number: " + accountNumber);
-    System.out.println("Current Balance: $" + balance);
+    System.out.println("Current Balance: " + formatMoney(balance));
 }
 
 public void checkBalance() {
 
-    System.out.println("Current balance: $" + balance);
+    System.out.println("Current balance: " + formatMoney(balance));
 }
 
 public void deposit(double amount) {
@@ -81,7 +93,7 @@ public void deposit(double amount) {
 
     balance += amount;
 
-    addTransaction("Deposit: $" + amount);
+    addTransaction("Deposit: " + formatMoney(amount));
 
     System.out.println("Deposit successful!");
 }
@@ -104,7 +116,7 @@ public void withdraw(double amount) {
 
     balance -= amount;
 
-    addTransaction("Withdraw: $" + amount);
+    addTransaction("Withdraw: " + formatMoney(amount));
 
     System.out.println("Withdrawal successful!");
 }
@@ -122,13 +134,13 @@ public void showTransactionHistory() {
 
 public void addTransferSent(double amount, int destinationAccount) {
 
-        addTransaction("Transfer sent: $" + amount + " to account " + destinationAccount);
+        addTransaction("Transfer sent: " + formatMoney(amount) + " to account " + destinationAccount);
 
     }
 
 public void addTransferReceived(double amount, int sourceAccount) {
 
-        addTransaction("Transfer received: $" + amount + " from account " + sourceAccount);
+        addTransaction("Transfer received: " + formatMoney(amount) + " from account " + sourceAccount);
 
     }
 }
