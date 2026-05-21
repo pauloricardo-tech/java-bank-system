@@ -207,6 +207,10 @@ public class AccountController {
 
         destinationAccount.deposit(amount);
 
+        currentAccount.addTransferSent(amount, destinationAccount.getAccountNumber());
+
+        destinationAccount.addTransferReceived(amount, currentAccount.getAccountNumber());
+
         Bank.saveAccounts(accounts);
 
         System.out.println("Transfer completed successfully!");
