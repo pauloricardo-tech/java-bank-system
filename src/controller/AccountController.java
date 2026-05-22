@@ -203,9 +203,20 @@ public class AccountController {
             return;
         }
 
-        currentAccount.withdraw(amount);
+        System.out.println("Confirm transfer of " + amount + " to account " + destinationAccount.getAccountNumber() + "? (Y/N)");
 
-        destinationAccount.deposit(amount);
+        String confirmation = scanner.next();
+
+        if (!confirmation.equalsIgnoreCase("Y")) {
+
+            System.out.println("Transfer cancelled!");
+
+            return;
+        }
+
+        currentAccount.withdrawWithoutHistory(amount);
+
+        destinationAccount.depositWithoutHistory(amount);
 
         currentAccount.addTransferSent(amount, destinationAccount.getAccountNumber());
 

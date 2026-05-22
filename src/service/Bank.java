@@ -58,6 +58,11 @@ public class Bank {
 
                     String line = fileScanner.nextLine();
 
+                    if (line.trim().isEmpty()) {
+
+                        continue;
+                    }
+
                     String[] parts = line.split(",");
 
                     int accountNumber = Integer.parseInt(parts[0]);

@@ -98,6 +98,11 @@ public void deposit(double amount) {
     System.out.println("Deposit successful!");
 }
 
+public void depositWithoutHistory(double amount) {
+
+        balance += amount;
+}
+
 public void withdraw(double amount) {
 
     if (amount <= 0) {
@@ -119,6 +124,11 @@ public void withdraw(double amount) {
     addTransaction("Withdraw: " + formatMoney(amount));
 
     System.out.println("Withdrawal successful!");
+}
+
+public void withdrawWithoutHistory(double amount) {
+
+        balance -= amount;
 }
 
 public void showTransactionHistory() {
