@@ -14,9 +14,13 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+
         ArrayList<Account> accounts = Bank.loadAccounts();
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("========================");
+        System.out.println("    JAVA BANK SYSTEM");
+        System.out.println("========================");
 
         Account account = Menu.login(accounts, scanner);
 
@@ -27,7 +31,9 @@ public class Main {
 
         do {
 
+            System.out.println("\n========================");
             System.out.println("Current Account: " + account.getAccountNumber());
+            System.out.println("========================");
 
             Menu.showMenu();
 

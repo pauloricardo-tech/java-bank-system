@@ -22,7 +22,7 @@ public class Account {
 
     private ArrayList<String> transactionHistory = new ArrayList<>();
 
-    private String formatMoney(double amount) {
+    public String formatMoney(double amount) {
 
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
 
@@ -79,7 +79,10 @@ public void showAccountInfo() {
 
 public void checkBalance() {
 
-    System.out.println("Current balance: " + formatMoney(balance));
+    System.out.println("\n========================");
+    System.out.println("Current Balance");
+    System.out.println(formatMoney(balance));
+    System.out.println("========================");
 }
 
 public void deposit(double amount) {
@@ -95,7 +98,7 @@ public void deposit(double amount) {
 
     addTransaction("Deposit: " + formatMoney(amount));
 
-    System.out.println("Deposit successful!");
+    System.out.println("[SUCCESS] Deposit completed successfully!");
 }
 
 public void depositWithoutHistory(double amount) {
@@ -107,7 +110,7 @@ public void withdraw(double amount) {
 
     if (amount <= 0) {
 
-        System.out.println("Invalid withdraw amount!");
+        System.out.println("[ERROR] Invalid withdraw amount!");
 
         return;
     }
@@ -133,13 +136,15 @@ public void withdrawWithoutHistory(double amount) {
 
 public void showTransactionHistory() {
 
-    System.out.println("\n=== Transaction History ===");
+    System.out.println("\n========== TRANSACTION HISTORY ==========\n");
 
     for (String transaction : transactionHistory) {
 
-        System.out.println(transaction);
+        System.out.println(transaction + "\n");
 
         }
+
+    System.out.println("=========================================");
     }
 
 public void addTransferSent(double amount, int destinationAccount) {

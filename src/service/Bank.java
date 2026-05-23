@@ -38,7 +38,6 @@ public class Bank {
 
             writer.close();
 
-            System.out.println("Accounts saved successfully");
         } catch (IOException e) {
 
             System.out.println("Error saving accounts");

@@ -135,7 +135,7 @@ public class AccountController {
 
     public static void depositMoney(Account account, ArrayList<Account> accounts, Scanner scanner) {
 
-        System.out.println("Enter deposit amount;");
+        System.out.println("Enter deposit amount:");
         double depositAmount = readDouble(scanner);
 
         account.deposit(depositAmount);
@@ -203,13 +203,13 @@ public class AccountController {
             return;
         }
 
-        System.out.println("Confirm transfer of " + amount + " to account " + destinationAccount.getAccountNumber() + "? (Y/N)");
+        System.out.println("Confirm transfer of " + currentAccount.formatMoney(amount) + " to account " + destinationAccount.getAccountNumber() + "? (Y/N)");
 
         String confirmation = scanner.next();
 
         if (!confirmation.equalsIgnoreCase("Y")) {
 
-            System.out.println("Transfer cancelled!");
+            System.out.println("[INFO] Transfer cancelled!");
 
             return;
         }
