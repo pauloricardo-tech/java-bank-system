@@ -20,6 +20,7 @@ public class Main {
 
         System.out.println("========================");
         System.out.println("    JAVA BANK SYSTEM");
+        System.out.println("         v1.0");
         System.out.println("========================");
 
         Account account = Menu.login(accounts, scanner);
@@ -33,6 +34,7 @@ public class Main {
 
             System.out.println("\n========================");
             System.out.println("Current Account: " + account.getAccountNumber());
+            System.out.println("User: " + account.getHolderName());
             System.out.println("========================");
 
             Menu.showMenu();
@@ -92,6 +94,18 @@ public class Main {
                 case 8:
 
                     AccountController.transferMoney(account, accounts, scanner);
+
+                    break;
+
+                case 9:
+
+                    System.out.println("\n[INFO] Logout completed successfully\n");
+
+                    account = Menu.login(accounts, scanner);
+
+                    if (account == null)
+
+                        return;
 
                     break;
 
