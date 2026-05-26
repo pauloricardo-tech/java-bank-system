@@ -32,6 +32,7 @@ public class Menu {
         System.out.println("7. Exit");
         System.out.println("8. Transfer Money");
         System.out.println("9. Logout");
+        System.out.println("10. Account Statement");
 
         System.out.println("\nChoose an option:");
         System.out.println("> ");

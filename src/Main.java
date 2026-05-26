@@ -109,6 +109,12 @@ public class Main {
 
                     break;
 
+                case 10:
+
+                    AccountController.showStatement(account);
+
+                    break;
+
                 default:
                     System.out.println("Invalid option.");
 

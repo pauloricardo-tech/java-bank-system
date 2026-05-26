@@ -228,6 +228,20 @@ public class AccountController {
 
     }
 
+    public static void showStatement(Account account) {
+
+        System.out.println("\n========== ACCOUNT STATEMENT ==========\n");
+
+        System.out.println("User: " + account.getHolderName());
+        System.out.println("Account Number: " + account.getAccountNumber());
+        System.out.println("Current Balance: " + account.formatMoney(account.getBalance()));
+
+        System.out.println("\nRecent Transactions:\n");
+
+        account.showTransactionHistory();
+
+    }
+
     public static void  exitSystem(ArrayList<Account> accounts) {
 
         System.out.println("Exiting system...");

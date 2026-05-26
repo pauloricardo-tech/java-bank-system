@@ -138,6 +138,16 @@ public void showTransactionHistory() {
 
     System.out.println("\n========== TRANSACTION HISTORY ==========\n");
 
+    if (transactionHistory.isEmpty()) {
+
+        System.out.println("[INFO] No transactions found.\n");
+
+        System.out.println("=========================================");
+
+        return;
+
+    }
+
     for (String transaction : transactionHistory) {
 
         System.out.println(transaction + "\n");
