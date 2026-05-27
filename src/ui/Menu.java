@@ -51,18 +51,34 @@ public class Menu {
             return null;
         }
 
-        System.out.println("Enter PIN");
-        int enteredPin = scanner.nextInt();
+        int attempts = 0;
 
-        if (account.getPin() != enteredPin) {
+        while (attempts < 3) {
 
-            System.out.println("Incorrect PIN!");
-            return null;
+            System.out.println("Enter PIN:");
+            int enteredPin = scanner.nextInt();
+
+            if (account.getPin() == enteredPin) {
+
+                Menu.showAccountHeader(account);
+
+                return account;
+            }
+
+            attempts++;
+
+            System.out.println("\n[ERROR] Incorrect PIN!");
+
+            if (attempts < 3) {
+
+                System.out.println("Attempts remaining: " + (3 - attempts));
+            }
         }
 
-        Menu.showAccountHeader(account);
+        System.out.println("\n[ERROR] Too many failed attempts!");
 
-        return account;
+        return null;
+
     }
 
 }
