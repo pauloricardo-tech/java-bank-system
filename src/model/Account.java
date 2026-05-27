@@ -89,7 +89,7 @@ public void deposit(double amount) {
 
     if (amount <= 0) {
 
-        System.out.println("Invalid deposit amount!");
+        System.out.println("[ERROR] Invalid deposit amount!");
 
         return;
     }
@@ -117,7 +117,7 @@ public void withdraw(double amount) {
 
     if (amount > balance) {
 
-        System.out.println("Insufficient balance!");
+        System.out.println("[ERROR] Insufficient balance!");
 
         return;
     }
@@ -126,7 +126,7 @@ public void withdraw(double amount) {
 
     addTransaction("Withdraw: " + formatMoney(amount));
 
-    System.out.println("Withdrawal successful!");
+    System.out.println("[SUCCESS] Withdrawal completed successfully!");
 }
 
 public void withdrawWithoutHistory(double amount) {

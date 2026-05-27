@@ -13,7 +13,7 @@ public class AccountController {
 
         while (!scanner.hasNextInt()) {
 
-            System.out.println("Invalid number! Try again:");
+            System.out.println("[ERROR] Invalid number! Try again:");
 
             scanner.next();
         }
@@ -25,7 +25,7 @@ public class AccountController {
 
         while (!scanner.hasNextDouble()) {
 
-            System.out.println("Invalid value! Try again:");
+            System.out.println("[ERROR] Invalid value! Try again:");
 
             scanner.next();
         }
@@ -42,7 +42,7 @@ public class AccountController {
 
         if (existingAccount != null) {
 
-            System.out.println("Account already exists!");
+            System.out.println("[ERROR] Account already exists!");
             return;
         }
 
@@ -61,7 +61,7 @@ public class AccountController {
 
         if (pin < 1000 || pin > 9999) {
 
-            System.out.println("PIN must have 4 digits!");
+            System.out.println("[ERROR] PIN must have 4 digits!");
             return;
         }
 
@@ -72,7 +72,7 @@ public class AccountController {
 
         Bank.saveAccounts(accounts);
 
-        System.out.println("Account created successfully");
+        System.out.println("[SUCCESS] Account created successfully!");
     }
 
     public static int readPin(Scanner scanner) {
@@ -81,14 +81,14 @@ public class AccountController {
 
         if (pinInput.length() != 4) {
 
-            System.out.println("PIN must have exactly 4 digits!");
+            System.out.println("[ERROR] PIN must have exactly 4 digits!");
 
             return -1;
         }
 
         if (!pinInput.matches("\\d{4}")) {
 
-            System.out.println("PIN must contain only numbers!");
+            System.out.println("[ERROR] PIN must contain only numbers!");
 
             return -1;
         }
@@ -105,7 +105,7 @@ public class AccountController {
 
         if (foundAccount == null) {
 
-            System.out.println("Account not found!");
+            System.out.println("[ERROR] Account not found!");
 
             return null;
         }
@@ -120,12 +120,12 @@ public class AccountController {
 
         if (foundAccount.getPin() != enteredPin) {
 
-            System.out.println("Incorrect PIN!");
+            System.out.println("[ERROR] Incorrect PIN!");
 
             return null;
         }
 
-        System.out.println("Account switched successfully!");
+        System.out.println("[SUCCESS] Account switched successfully!");
 
         Menu.showAccountHeader(foundAccount);
 
@@ -173,14 +173,14 @@ public class AccountController {
 
         if (destinationAccount == null) {
 
-            System.out.println("Destination account not found!");
+            System.out.println("[ERROR] Destination account not found!");
 
             return;
         }
 
         if (currentAccount.getAccountNumber() == destinationNumber) {
 
-            System.out.println("Cannot transfer to the same account!");
+            System.out.println("[ERROR] Cannot transfer to the same account!");
 
             return;
         }
@@ -191,14 +191,14 @@ public class AccountController {
 
         if (amount <= 0) {
 
-            System.out.println("Transfer amount must be greater than 0!");
+            System.out.println("[ERROR] Transfer amount must be greater than 0!");
 
             return;
         }
 
         if (amount > currentAccount.getBalance()) {
 
-            System.out.println("Insufficient balance!");
+            System.out.println("[ERROR] Insufficient balance!");
 
             return;
         }
@@ -224,7 +224,7 @@ public class AccountController {
 
         Bank.saveAccounts(accounts);
 
-        System.out.println("Transfer completed successfully!");
+        System.out.println("[SUCCESS] Transfer completed successfully!");
 
     }
 
@@ -244,7 +244,7 @@ public class AccountController {
 
     public static void  exitSystem(ArrayList<Account> accounts) {
 
-        System.out.println("Exiting system...");
+        System.out.println("[INFO] Exiting system...");
 
         Bank.saveAccounts(accounts);
     }

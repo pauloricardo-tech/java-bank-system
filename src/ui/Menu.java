@@ -47,7 +47,7 @@ public class Menu {
 
         if (account == null) {
 
-            System.out.println("Account not found!");
+            System.out.println("[ERROR] Account not found!");
             return null;
         }
 
@@ -56,7 +56,8 @@ public class Menu {
         while (attempts < 3) {
 
             System.out.println("Enter PIN:");
-            int enteredPin = scanner.nextInt();
+
+            int enteredPin = AccountController.readInt(scanner);
 
             if (account.getPin() == enteredPin) {
 

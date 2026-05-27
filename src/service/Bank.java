@@ -79,7 +79,7 @@ public class Bank {
 
             } catch (FileNotFoundException e) {
 
-                System.out.println("No saved accounts found");
+                System.out.println("[ERROR] No saved accounts found");
             }
 
             return accounts;
