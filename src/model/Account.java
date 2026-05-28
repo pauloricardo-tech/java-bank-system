@@ -148,24 +148,32 @@ public void showTransactionHistory() {
 
     }
 
-    for (String transaction : transactionHistory) {
+    int start = Math.max(0, transactionHistory.size() - 5);
 
-        System.out.println(transaction + "\n");
+    for (int i = start; i < transactionHistory.size(); i++) {
+
+        System.out.println(transactionHistory.get(i) + "\n");
 
         }
 
     System.out.println("=========================================");
+
     }
+
+public ArrayList<String> getTransactionHistory() {
+
+        return transactionHistory;
+}
 
 public void addTransferSent(double amount, int destinationAccount) {
 
-        addTransaction("Transfer sent: " + formatMoney(amount) + " to account " + destinationAccount);
+        addTransaction("Transfer Sent: " + formatMoney(amount) + " to account " + destinationAccount);
 
     }
 
 public void addTransferReceived(double amount, int sourceAccount) {
 
-        addTransaction("Transfer received: " + formatMoney(amount) + " from account " + sourceAccount);
+        addTransaction("Transfer Received: " + formatMoney(amount) + " from account " + sourceAccount);
 
     }
 }

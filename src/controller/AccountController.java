@@ -236,7 +236,41 @@ public class AccountController {
         System.out.println("Account Number: " + account.getAccountNumber());
         System.out.println("Current Balance: " + account.formatMoney(account.getBalance()));
 
-        System.out.println("\nRecent Transactions:\n");
+        int deposits = 0;
+        int withdrawals = 0;
+        int transfersSent = 0;
+        int transfersReceived = 0;
+
+        for (String transaction : account.getTransactionHistory()) {
+
+            String lowerTransaction = transaction.toLowerCase();
+
+            if (lowerTransaction.contains("deposit")) {
+
+                deposits++;
+
+            } else if (lowerTransaction.contains("withdraw")) {
+
+                withdrawals++;
+
+            } else if (lowerTransaction.contains("transfer sent")) {
+
+                transfersSent++;
+
+            } else if (lowerTransaction.contains("transfer received")) {
+
+                transfersReceived++;
+            }
+        }
+
+        System.out.println("\nTransaction Summary:\n");
+
+        System.out.println("Deposits: " + deposits);
+        System.out.println("Withdrawals: " + withdrawals);
+        System.out.println("Transfers Sent: " + transfersSent);
+        System.out.println("Transfers Received: " + transfersReceived);
+
+        System.out.println("\nLast 5 Transactions:\n");
 
         account.showTransactionHistory();
 
