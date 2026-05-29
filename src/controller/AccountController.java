@@ -4,6 +4,8 @@ import model.Account;
 import service.Bank;
 import ui.Menu;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -232,10 +234,17 @@ public class AccountController {
 
         System.out.println("\n========== ACCOUNT STATEMENT ==========\n");
 
+        LocalDateTime now = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        System.out.println("Statement Generated: " + now.format(formatter));
+
         System.out.println("User: " + account.getHolderName());
         System.out.println("Account Number: " + account.getAccountNumber());
         System.out.println("Current Balance: " + account.formatMoney(account.getBalance()));
 
+        int totalTransactions = account.getTransactionHistory().size();
         int deposits = 0;
         int withdrawals = 0;
         int transfersSent = 0;
@@ -265,6 +274,7 @@ public class AccountController {
 
         System.out.println("\nTransaction Summary:\n");
 
+        System.out.println("Total Transactions: " + totalTransactions);
         System.out.println("Deposits: " + deposits);
         System.out.println("Withdrawals: " + withdrawals);
         System.out.println("Transfers Sent: " + transfersSent);
