@@ -114,6 +114,12 @@ public class Main {
 
                     break;
 
+                case 11:
+
+                    AccountController.searchTransactions(account, scanner);
+
+                    break;
+
                 default:
                     System.out.println("Invalid option.");
 

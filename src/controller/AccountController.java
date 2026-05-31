@@ -286,6 +286,67 @@ public class AccountController {
 
     }
 
+    public static void searchTransactions(Account account, Scanner scanner) {
+
+        System.out.println("\n=== SEARCH TRANSACTIONS ===\n");
+
+        System.out.println("1. Deposits");
+        System.out.println("2. Withdrawals");
+        System.out.println("3. Transfers Sent");
+        System.out.println("4. Transfers Received");
+
+        System.out.println("\nChoose an option:");
+
+        int option = readInt(scanner);
+
+        String filter = "";
+
+        switch (option) {
+
+            case 1:
+                filter = "deposit";
+                break;
+
+            case 2:
+                filter = "withdraw";
+                break;
+
+            case 3:
+                filter = "transfer sent";
+                break;
+
+            case 4:
+                filter = "transfer received";
+                break;
+
+            default:
+                System.out.println("[ERROR] Invalid option!");
+                return;
+        }
+
+        System.out.println("\n========== RESULTS ==========\n");
+
+        boolean found = false;
+
+        for (String transaction : account.getTransactionHistory()) {
+
+            if (transaction.toLowerCase().contains(filter)) {
+
+                System.out.println(transaction + "\n");
+
+                found = true;
+            }
+        }
+
+        if (!found) {
+
+            System.out.println("[INFO] No matching transactions found.\n");
+        }
+
+        System.out.println("=========================================");
+
+    }
+
     public static void  exitSystem(ArrayList<Account> accounts) {
 
         System.out.println("[INFO] Exiting system...");
