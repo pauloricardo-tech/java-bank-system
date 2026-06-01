@@ -28,12 +28,12 @@ public class Menu {
         System.out.println("3. Check Balance");
         System.out.println("4. Deposit");
         System.out.println("5. Withdraw");
-        System.out.println("6. Transaction History");
-        System.out.println("7. Exit");
-        System.out.println("8. Transfer Money");
-        System.out.println("9. Logout");
-        System.out.println("10. Account Statement");
-        System.out.println("11. Search Transactions");
+        System.out.println("6. Transfer Money");
+        System.out.println("7. Transaction History");
+        System.out.println("8. Account Statement");
+        System.out.println("9. Search Transactions");
+        System.out.println("10. Logout");
+        System.out.println("11. Exit");
 
         System.out.println("\nChoose an option:");
         System.out.println("> ");

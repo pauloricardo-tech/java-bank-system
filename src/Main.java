@@ -80,23 +80,29 @@ public class Main {
 
                 case 6:
 
-                    AccountController.showHistory(account);
+                    AccountController.transferMoney(account, accounts, scanner);
 
                     break;
 
                 case 7:
 
-                    AccountController.exitSystem(accounts);
+                    AccountController.showHistory(account);
 
                     break;
 
                 case 8:
 
-                    AccountController.transferMoney(account, accounts, scanner);
+                    AccountController.showStatement(account);
 
                     break;
 
                 case 9:
+
+                    AccountController.searchTransactions(account, scanner);
+
+                    break;
+
+                case 10:
 
                     System.out.println("\n[INFO] Logout completed successfully\n");
 
@@ -108,15 +114,9 @@ public class Main {
 
                     break;
 
-                case 10:
-
-                    AccountController.showStatement(account);
-
-                    break;
-
                 case 11:
 
-                    AccountController.searchTransactions(account, scanner);
+                    AccountController.exitSystem(accounts);
 
                     break;
 
@@ -125,7 +125,7 @@ public class Main {
 
             }
 
-        } while (option != 7);
+        } while (option != 11);
 
         scanner.close();
     }

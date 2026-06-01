@@ -328,6 +328,8 @@ public class AccountController {
 
         boolean found = false;
 
+        int resultsCount = 0;
+
         for (String transaction : account.getTransactionHistory()) {
 
             if (transaction.toLowerCase().contains(filter)) {
@@ -335,8 +337,11 @@ public class AccountController {
                 System.out.println(transaction + "\n");
 
                 found = true;
+                resultsCount++;
             }
         }
+
+        System.out.println("Found " + resultsCount + " transaction(s)\n");
 
         if (!found) {
 
